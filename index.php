@@ -6,7 +6,7 @@
     <?php
     ini_set('display_errors',1);
     ini_set('display_startup_erros',1);
-    error_reporting(E_ERROR | E_PARSE );
+    error_reporting(E_ERROR | E_PARSE | E_WARNING );
     require ('lib/config.php');
     require ('lib/autoload.php');
     require ('lib/plugin/load_css.php');
@@ -22,15 +22,27 @@
     <?php
     require ('App/viel/menu.php');
     echo '<br>';
-    $teste  = new Init(fulano,sapato);
 
-    $teste->acao = 'fsdfsd';
+    require ('query.php');
 
     $fom = new Tform;
-    $fom->Tinput();
     $fom->setTtipe('date');
+    $fom->Tinput();
+
 
     ?>
-        </div>
+
+
+    <input type="text" list="cidades" autocomplete="on">
+    <datalist id="cidades">
+        <option value="Brasília">
+        <option value="Rio de Janeiro">
+        <option value="São Paulo">
+    </datalist>
+
+
+
+
+    </div>
 </body>
 </html>

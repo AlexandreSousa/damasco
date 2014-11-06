@@ -11,8 +11,9 @@ class Tform {
 
 
     public function Tinput(){
-
-        echo '<input type="'.$this->Ttipe.'" id="" name="" value="" placeholder="" title="" >';
+        echo '<label>';
+        echo '<input class="form-control" type="search" results="10" autofocus="" id="" name="" value="" placeholder="" title="" size="20">';
+        echo '</label>';
     }
 
     /**
