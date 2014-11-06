@@ -1,0 +1,12 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.demo-notice{
+    background: none repeat scroll 0 0 #D75F07;
+    color:#FFF;
+    line-height:1em;
+    text-align:center;
+    font:12px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-variant:small-caps;
+}
