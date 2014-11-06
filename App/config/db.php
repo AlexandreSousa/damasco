@@ -1,7 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alexandre
- * Date: 06/11/14
- * Time: 01:01
- */ 
+ * Conexão com banco de dados
+ */
+
+$host       = '127.0.0.1';
+$user       = 'root';
+$pw         = '455ttte';
+$db         = 'sgga2';
+
+$mysqli = new mysqli($host,$user,$pw,$db);

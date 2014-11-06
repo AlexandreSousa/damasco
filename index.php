@@ -1,3 +1,4 @@
+<?php require ('App/config/db.php'); ?>
 <!DOCTYPE html>
 <html>
 <head lang="pt-br">
@@ -25,23 +26,7 @@
 
     require ('query.php');
 
-    $fom = new Tform;
-    $fom->setTtipe('date');
-    $fom->Tinput();
-
-
     ?>
-
-
-    <input type="text" list="cidades" autocomplete="on">
-    <datalist id="cidades">
-        <option value="Brasília">
-        <option value="Rio de Janeiro">
-        <option value="São Paulo">
-    </datalist>
-
-
-
 
     </div>
 </body>

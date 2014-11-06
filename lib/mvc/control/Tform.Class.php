@@ -8,12 +8,33 @@
 
 class Tform {
     public $Ttipe;
+    public $List;
+    public $Label;
+    public $Tcampo;
 
-
-    public function Tinput(){
-        echo '<label>';
-        echo '<input class="form-control" type="search" results="10" autofocus="" id="" name="" value="" placeholder="" title="" size="20">';
+    public function Tinput($type,$name,$id,$value,$placeholder,$title,$size){
+        echo '<label>'.$this->Label.'<br>';
+        echo '<input class="form-control" type="'.$type.'" '.$this->Tcampo.' id="'.$id.'" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'" title="'.$title.'" size="'.$size.'">';
         echo '</label>';
+    }
+
+    public function TdataList($name){
+        echo '<label>';
+        echo '<input class="form-control" name="'.$name.'" type="text" list="'.$name.'" autocomplete="on">';
+               echo  '<datalist id="'.$name.'">';
+            foreach(explode(',',$this->List) as $list) {
+                echo '<option value = "'.$list.'" >';
+                    }
+               echo  '</datalist>';
+        echo '<label>';
+    }
+
+    /**
+     * @param mixed $List
+     */
+    public function setList($List)
+    {
+        $this->List = $List;
     }
 
     /**
@@ -24,5 +45,20 @@ class Tform {
         $this->Ttipe = $Ttipe;
     }
 
+    /**
+     * @param mixed $Tcampo
+     */
+    public function setTcampo($Tcampo)
+    {
+        $this->Tcampo = $Tcampo;
+    }
+
+    /**
+     * @param mixed $Label
+     */
+    public function setLabel($Label)
+    {
+        $this->Label = $Label;
+    }
 
 } 
