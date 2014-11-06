@@ -10,6 +10,7 @@
     require ('lib/config.php');
     require ('lib/autoload.php');
     require ('lib/plugin/load_css.php');
+    require ('lib/plugin/load_bootstrap.php');
     ?>
 </head>
 <body>
@@ -19,7 +20,9 @@
 
     $teste->acao = 'fsdfsd';
 
-   // var_dump($teste);
+    $fom = new Tform;
+    $fom->Tinput();
+    $fom->setTtipe('date');
 
     ?>
 </body>
