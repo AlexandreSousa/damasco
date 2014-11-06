@@ -6,3 +6,11 @@
     font:12px "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-variant:small-caps;
 }
+.geral {
+    min-height:94%;
+    position:relative;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
