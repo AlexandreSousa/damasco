@@ -26,16 +26,47 @@ $pag = "$_GET[pag]";
 $maximo = '10';
 $inicio =  ($pag * $maximo) - $maximo;
 
-$res        = $mysqli->query("SELECT * FROM empresa LIMIT $inicio, $maximo");
+$res        = $mysqli->query("SELECT * FROM login LIMIT $inicio, $maximo");
 
+$total = $mysqli->query("SELECT * FROM login");
+
+$de = $total->num_rows - $inicio ;
+
+echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$de}";
+
+?>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Login</th>
+        <th colspan="2">Ações</th>
+    </tr>
+<?php
 while($ok = $res->fetch_array()){
-    echo $ok['nome'].'<br>';
-}
 
+    ?>
+    <tr>
+    <?php
+    echo '<td>'.$ok['id'].'</td>';
+    echo '<td>'.$ok['cpf'].'</td>';
+    echo '<td>'.$ok['senha'].'</td>';
+    ?>
+        <td width="1"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></td>
+        <td width="1"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>
+    </tr>
+
+    <?php
+    }
+
+?>
+
+</table>
+<?php
 echo '<br>';
 
 echo '<ul class="pagination">';
-    $pagin = $mysqli->query("SELECT * FROM empresa");
+    $pagin = $mysqli->query("SELECT * FROM login");
     $total = $pagin->num_rows;
     $paginas = ceil($total/$maximo);
     $links = '5';
