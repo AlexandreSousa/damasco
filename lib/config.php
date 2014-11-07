@@ -16,3 +16,8 @@ $bootstrap = 1;
  *
  */
 $licenca = 'Alexandre Sousa';
+
+/**
+ * Diretório da Aplicação
+ */
+define("APP","./");

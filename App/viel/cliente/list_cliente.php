@@ -33,7 +33,7 @@ $res = $db->read('login','',"LIMIT {$inicio}, {$maximo}");
 
 
 
-$topo->TtotalDb(login)
+$topo->TtotalDb(login);
 
 ?>
 <table class="table table-striped table-hover">

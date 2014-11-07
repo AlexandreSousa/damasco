@@ -1,8 +1,34 @@
 <?php
-
+/**
+ * 
+ * @package     Damasco
+ * @subpackage  Damasco.Core.Model
+ */
 class Tgrid{
     public $Db;
     
+    /**
+     * Função start da classe Tgrid
+     * 
+     * - Instância a objeto db (conexão com o banco de dados)
+     * 
+     * @return  void
+     */
+    public function __construct()
+    {
+        require_once(APP.'App/config/db.php');
+        $this->db = new  mysqli($host,$user,$pass,$data);
+    }
+    
+    /**
+     * Função end da classe Tgrid
+     * 
+     * - Fecha a conexão com o banco de dados
+     */
+    public function __destruct()
+    {
+        // tem que criar a função close do db
+    }
     
     
     
@@ -36,20 +62,18 @@ class Tgrid{
      * @param string    $campos         Campos da tabela
      */
     
-    public function Ttable(){
-                
-        
-        
-        
+    public function Ttable()
+    {
     }
     
     
     
     
-    public function TtotalDb($tabela){
+    public function TtotalDb($tabela)
+    {
+        $total = $this->db->query("SELECT * FROM {$tabel}");
         
-        $total = $mysqli->query("SELECT * FROM {$tabel}");
-        $de = $total->num_rows - $inicio ;
+        $de = $this->db->num_rows - $inicio ;
         echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$de}";
     }
     
