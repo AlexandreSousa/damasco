@@ -28,12 +28,12 @@ $inicio =  ($pag * $maximo) - $maximo;
 
 //$res        = $mysqli->query("SELECT * FROM login LIMIT $inicio, $maximo");
 
-$res = $db->read('empresa','',"LIMIT {$inicio}, {$maximo}");
+$res = $db->read('login','',"LIMIT {$inicio}, {$maximo}");
 
 
 
 
-$total = $mysqli->query("SELECT * FROM empresa");
+$total = $mysqli->query("SELECT * FROM login");
 
 $de = $total->num_rows - $inicio ;
 
@@ -71,7 +71,7 @@ while($ok = $res->fetch_array()){
 echo '<br>';
 
 echo '<ul class="pagination">';
-    $pagin = $mysqli->query("SELECT * FROM empresa");
+    $pagin = $mysqli->query("SELECT * FROM login");
     $total = $pagin->num_rows;
     $paginas = ceil($total/$maximo);
     $links = '5';

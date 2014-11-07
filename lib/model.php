@@ -1,26 +1,52 @@
 <?php
 /**
  * Conexão com Banco de dados
+ * 
+ * Classe para conexão com o banco de dados
+ * 
+ * @package     Damascao
+ * @subpackage  Damasco.Core.Model
  */
-
-
 class db {
     public $_db;
     public $Key;
+    
+    public $host = 'mysql.rapidserver.com.br';
+    public $user = 'datainf_datainfo';
+    public $pass = 'Leozinho1';
+    public $data = 'datainf_db_sec';
 
-    public function creat($tabela,$campos){
+    /**
+     * 
+     * @param   string  $tabela     Nome da tabela
+     * @param   string  $campos     Campos da tabela
+     * @return  void
+     */
+    public function creat($tabela,$campos)
+    {
+        
+       $mysqli = new  mysqli();
 
-        $keys = array_keys($campos);
+        $keys   = array_keys($campos);
         $chaves = "`".implode("`,`", $keys)."`";
-        $valores = "'" . implode("','", $campos) . "'";
-        $mysqli->query("INSERT INTO {$tabela} ({$chaves})VALUES ({$valores})";
+        $valores= "'" . implode("','", $campos) . "'";
+        $sql    = "INSERT INTO {$tabela} ({$chaves})VALUES ({$valores});
+        $mysqli->query($sql)";
 
-        $alert = new Alert;
+        $alert  = new Alert;
         $alert->Talert();
 
     }
+    /**
+     * 
+     * @param   string  $db       Nome da Tabela
+     * @param   string  $where    Where da tabela
+     * @param   string  $limit    Limites maximo e minimu para consulta
+     * @return  void
+     */
 
     public function read($db, $where, $limit){
+       $mysqli = new  mysqli($this->host,$this->user,$this->pass,$this->data);
 
        return $mysqli->query("SELECT * FROM {$db}  {$where} {$limit}");
 
