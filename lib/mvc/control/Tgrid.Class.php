@@ -6,6 +6,7 @@
  */
 class Tgrid{
     public $Db;
+    public $db;
     
     /**
      * Função start da classe Tgrid
@@ -16,7 +17,7 @@ class Tgrid{
      */
     public function __construct()
     {
-        require_once(APP.'App/config/db.php');
+        require_once('App/config/db.php');
         $this->db = new  mysqli($host,$user,$pass,$data);
     }
     
@@ -71,11 +72,12 @@ class Tgrid{
     
     public function TtotalDb($tabela)
     {
-        $total = $this->db->query("SELECT * FROM {$tabel}");
+        $total = $this->db->query("SELECT * FROM {$tabela}");
         
-        $de = $this->db->num_rows - $inicio ;
-        echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$de}";
-    }
+         $total->num_rows;
+        echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$total}";
+
+        }
     
     
     
