@@ -8,17 +8,12 @@
 
 
 
-$topo new Tgrid();
+$topo = new Tgrid();
 $topo->Ttopo('Listagen de usuario','cliente','cliente');
 
 
 echo '<br>';
 
-$teste = new Tform();
-$teste->setLabel('Nome:');
-$teste->Tinput('text','teste','teste','','','Teste',20);
-
-echo '<br>';
 
 $mod = 'cliente';
 $file = 'cliente';
@@ -38,12 +33,7 @@ $res = $db->read('login','',"LIMIT {$inicio}, {$maximo}");
 
 
 
-
-$total = $mysqli->query("SELECT * FROM login");
-
-$de = $total->num_rows - $inicio ;
-
-echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$de}";
+$topo->TtotalDb(login)
 
 ?>
 <table class="table table-striped table-hover">
