@@ -6,6 +6,12 @@
  * Time: 16:34
  */
 
+
+
+$topo new Tgrid();
+$topo->Ttopo('Listagen de usuario','cliente','cliente');
+
+
 echo '<br>';
 
 $teste = new Tform();
