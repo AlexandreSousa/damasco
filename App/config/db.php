@@ -8,4 +8,4 @@
      $pass = 'Leozinho1';
      $data = 'datainf_db_sec';
 
-$mysqli = new  mysqli($this->host,$this->user,$this->pass,$this->data);
+     $mysqli = new  mysqli($host,$user,$pass,$data);
