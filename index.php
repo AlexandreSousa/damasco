@@ -9,10 +9,14 @@
     ini_set('display_startup_erros',1);
     error_reporting(E_ERROR | E_PARSE | E_WARNING );
     require ('lib/config.php');
+    require ('lib/model.php');
+    $db = new db;
     require ('lib/autoload.php');
     require ('lib/plugin/load_css.php');
     require ('lib/plugin/load_js.php');
     require ('lib/plugin/load_bootstrap.php');
+
+
     ?>
 </head>
 <body>

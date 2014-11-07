@@ -8,7 +8,7 @@
     </button>
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="?pg=modulos/cliente/list_cliente"><i class="fa fa-plus-square"></i>&nbsp;Formularios</a></li>
+        <li><a href="?pg=cliente/list_cliente"><i class="fa fa-plus-square"></i>&nbsp;Formularios</a></li>
 
     </ul>
 </div>

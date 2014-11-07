@@ -3,9 +3,9 @@
  * Conexão com banco de dados
  */
 
-$host       = 'mysql.rapidserver.com.br';
-$user       = 'datainf_master';
-$pw         = 'M1000sfpo';
-$db         = 'datainf_db_sec';
+$host       = '127.0.0.1';
+$user       = 'root';
+$pw         = '455ttte';
+$db         = 'sgga2';
 
 $mysqli = new mysqli($host,$user,$pw,$db);
