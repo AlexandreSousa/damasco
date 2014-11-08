@@ -74,7 +74,7 @@ class Tgrid{
     {
         $total = $this->db->query("SELECT * FROM {$tabela}");
         
-           $total->num_rows;
+        $total->num_rows;
         echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$total}";
 
         }
