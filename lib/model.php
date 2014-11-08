@@ -10,11 +10,14 @@
 class db {
     public $_db;
     public $Key;
-    
-    public $host = 'mysql.rapidserver.com.br';
-    public $user = 'datainf_datainfo';
-    public $pass = 'Leozinho1';
-    public $data = 'datainf_db_sec';
+    public $limite;
+
+
+    public function __construct()
+    {
+        require_once('App/config/db.php');
+        $this->db = new  mysqli($host,$user,$pass,$data);
+    }
 
     /**
      * 
@@ -46,10 +49,10 @@ class db {
      */
 
     public function read($db, $where, $limit){
-       $mysqli = new  mysqli($this->host,$this->user,$this->pass,$this->data);
 
-       return $mysqli->query("SELECT * FROM {$db}  {$where} {$limit}");
-
+       $select =  $this->db->query("SELECT * FROM {$db}  {$where} {$limit}");
+       return $select;
+       return $limit;
     }
 
     public function update($_db,$campos,$where){
@@ -83,4 +86,5 @@ class db {
     {
         $this->Key = $Key;
     }
+
 }
