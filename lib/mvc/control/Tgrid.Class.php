@@ -1,6 +1,5 @@
 <?php
 /**
- * 
  * @package     Damasco
  * @subpackage  Damasco.Core.Model
  */
@@ -10,8 +9,12 @@ class Tgrid extends db{
     public $Modulos;
     public $Campos;
     public $CamposSecond;
+    public $Where;
+    public $Valor;
+    public $DbSecond;
     public $Herd;
     public $PrimaryKey;
+    public $Pagin;
 
     /**
      * Função start da classe Tgrid
@@ -41,7 +44,7 @@ class Tgrid extends db{
         <div style="padding:0 10px;"><div  style="border-bottom: solid 3px #297ACC">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td width="12%"><strong>'.$nome.'</strong></td>
+                <td width="12%"><strong>'.$name.'</strong></td>
                 <td width="8%" align="right"><ul class="nav  span7" style="margin-bottom:0px;">
                         <li class="pull-right"><a href="?pg='.$folde.'/list_'.$file.'">Listar</a></li>
                         <li class="pull-right"><a href="?pg='.$folde.'/add_'.$file.'">Cadastrar</a></li>
@@ -52,9 +55,6 @@ class Tgrid extends db{
         <br />
         ';
     }
-    public function TtopTable($campos){
-
-    }
     /**
      *
      * @Param string    $db             Banco de dados
@@ -63,10 +63,9 @@ class Tgrid extends db{
 
     public function Ttable($db,$Campos)
     {
-
-        echo '<table class="table table-striped table-hover">';
+        echo '<table width="100%" border="0" cellpadding="0" class="table table-striped table-hover" cellspacing="0" >';
         echo '<tr>';
-
+        $z = $this->CamposSecond;
 
         $h       = explode(',',$this->Herd);
 
@@ -75,22 +74,55 @@ class Tgrid extends db{
             echo '<th>'.$tpo.'</th>';
 
         }
-        echo '<tr>';
         echo '<th colspan="2">Ações</th>';
+        echo '<tr>';
 
 
-
-        $res = $this->db->query("SELECT * FROM empresa LIMIT $inicio, $maximo");
-        print_r($res->fetch_array());
-
+        $res = $this->db->query("SELECT * FROM {$db} $this->Pagin");
+        $res->fetch_array();
 
         while($ok = $res->fetch_array()){
             ?>
             <tr>
                 <?php
-                echo '<td>'.$ok['id'].'</td>';
-                echo '<td>'.$ok['nome'].'</td>';
-                echo '<td>'.$ok['fantasia'].'</td>';
+
+                foreach(explode(',',$Campos) as $b){
+                    /*
+                     * COMPARANDO O MODIFICADOR COM O CAMPO DA TABELA
+                     */
+                    $isEquals = false;
+                    $arrlength    =count($this->CamposSecond);
+                    for($x=0;$x<$arrlength;$x++) {
+                        if ( $this->CamposSecond[$x]==$b) {
+
+                                $dbs = count($this->DbSecond);
+                                for($d=0;$d<$dbs;$d++){
+
+                                    $we = count($this->Where);
+                                    for($w=0;$w<$we;$w++){
+                                        if($w == $d){
+                                            if($w == $x) {
+
+                                                $banco = $this->DbSecond[$d];
+                                                $campoc = $this->CamposSecond[$x];
+                                                $id = $this->Where[$x];
+
+                                                $ddd = $ok[$b];
+
+                                                $sech = $this->db->query("SELECT * FROM {$banco} WHERE {$id} = '$ddd'");
+                                                $fff = $sech->fetch_array();
+                                               // echo $fff[$d];
+                                                echo '<td>' .$fff[$this->Valor[$x]]. '</td>';
+                                             }
+                                        }
+                                    }
+                                    $isEquals = true;
+                                }
+                        }
+                    }
+                    if(!$isEquals) echo '<td>'.$ok[$b].'</td>';
+                }
+
                 ?>
                 <td width="1"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></td>
                 <td width="1"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>
@@ -99,8 +131,7 @@ class Tgrid extends db{
         <?php
         }
 
-
-
+        echo '</table>';
     }
 
 
@@ -157,7 +188,49 @@ class Tgrid extends db{
         $this->Herd = $Herd;
     }
 
+    /**
+     * @param mixed $Pagin
+     */
+    public function setPagin($inicio,$maximo)
+    {
 
+       $this->Pagin = "LIMIT $inicio,$maximo";
+
+
+       // $this->Pagin = "LIMIT $inicio $maximo";
+    }
+
+    /**
+     * @param mixed $CamposSecond
+     */
+    public function setCamposSecond($CamposSecond)
+    {
+        $this->CamposSecond = explode(',',$CamposSecond);
+    }
+
+    /**
+     * @param mixed $DbSecond
+     */
+    public function setDbSecond($DbSecond)
+    {
+        $this->DbSecond = explode(',',$DbSecond);
+    }
+
+    /**
+     * @param mixed $Where
+     */
+    public function setWhere($Where)
+    {
+        $this->Where = explode(',',$Where);
+    }
+
+    /**
+     * @param mixed $Valor
+     */
+    public function setValor($Valor)
+    {
+        $this->Valor = explode(',',$Valor);
+    }
     /**
      * Função end da classe Tgrid
      *

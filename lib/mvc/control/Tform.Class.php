@@ -11,6 +11,7 @@ class Tform {
     public $List;
     public $Label;
     public $Tcampo;
+    public $Form;
 
     public function Tinput($type,$name,$id,$value,$placeholder,$title,$size){
         echo '<label>'.$this->Label.'<br>';
@@ -59,6 +60,16 @@ class Tform {
     public function setLabel($Label)
     {
         $this->Label = $Label;
+    }
+
+    /**
+     * @param mixed $Form
+     */
+    public function setForm($Form)
+    {
+        echo '<form method="post" action="" name="form1" id="form1" enctype="multipart/form-data">';
+        $this->Form = $Form;
+        echo '</form>';
     }
 
 } 

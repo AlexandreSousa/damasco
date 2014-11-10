@@ -6,7 +6,8 @@
  * Time: 18:34
  */
 
-$x = new Tteste;
+$x = new Tform;
+$x->setLabel('Teste');
+$ok = $x->Tinput('tex','form','id','','Teste de formulario','',20);
 
-$x->setTste(aqui);
-$x->ola();
+$x->setForm($ok);
