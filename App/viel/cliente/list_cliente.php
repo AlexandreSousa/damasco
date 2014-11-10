@@ -24,6 +24,8 @@ $maximo = '10';
 $inicio =  ($pag * $maximo) - $maximo;
 
 
+$topo->setPrimaryKey('id');
+
 $topo->TtotalDb('empresa',$maximo);
 $topo->setPagin($inicio,$maximo);
 $topo->setHerd('ID,Level,Nome,Icone,Status');
@@ -35,7 +37,7 @@ $topo->setWhere('id,icone,id');
 
 $topo->setValor('level,id');
 
-$topo->Ttable('menu','id,id_level,nome,icon,status');
+$topo->Ttable('menu','id,id_level,nome,icon,status','cliente','cliente');
 ?>
 <?php
 echo '<br>';

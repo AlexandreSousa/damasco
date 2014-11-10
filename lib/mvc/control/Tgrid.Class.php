@@ -61,7 +61,7 @@ class Tgrid extends db{
      * @param string    $campos         Campos da tabela
      */
 
-    public function Ttable($db,$Campos)
+    public function Ttable($db,$Campos,$sis,$arquivos)
     {
         echo '<table width="100%" border="0" cellpadding="0" class="table table-striped table-hover" cellspacing="0" >';
         echo '<tr>';
@@ -122,12 +122,28 @@ class Tgrid extends db{
                     }
                     if(!$isEquals) echo '<td>'.$ok[$b].'</td>';
                 }
-
                 ?>
                 <td width="1"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></td>
-                <td width="1"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>
-            </tr>
+                <td width="1"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete<?php echo $ok[$this->PrimaryKey];?>" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>
 
+                <div class="modal fade" id="delete<?php echo $ok[$this->PrimaryKey];?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title custom_align" id="Heading">Apagar arquivo? <?php echo $ok['nome'] ?></h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Esta ação não pode ser desfeita</div>
+
+                            </div>
+                            <div class="modal-footer ">
+                                <a href="?pg=<?php  echo  "$sis/dell_$arquivos" ?>&<?php echo $this->PrimaryKey ?>=<?php echo $ok['id'] ?>" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Sim</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+                            </div>
+                        </div>
+            </tr>
         <?php
         }
 
@@ -201,6 +217,14 @@ class Tgrid extends db{
     }
 
     /**
+     * @param mixed $PrimaryKey
+     */
+    public function setPrimaryKey($PrimaryKey)
+    {
+        $this->PrimaryKey = $PrimaryKey;
+    }
+
+    /**
      * @param mixed $CamposSecond
      */
     public function setCamposSecond($CamposSecond)
@@ -231,6 +255,8 @@ class Tgrid extends db{
     {
         $this->Valor = explode(',',$Valor);
     }
+
+
     /**
      * Função end da classe Tgrid
      *
