@@ -15,8 +15,8 @@ class db {
 
     public function __construct()
     {
-        require_once('App/config/db.php');
-        $this->db = new  mysqli($host,$user,$pass,$data);
+        require('/var/www/damasco/App/config/db.php');
+        $this->db = new mysqli($host,$user,$pass,$data);
     }
 
     /**
@@ -27,17 +27,15 @@ class db {
      */
     public function creat($tabela,$campos)
     {
-        
-       $mysqli = new  mysqli();
 
         $keys   = array_keys($campos);
         $chaves = "`".implode("`,`", $keys)."`";
         $valores= "'" . implode("','", $campos) . "'";
-        $sql    = "INSERT INTO {$tabela} ({$chaves})VALUES ({$valores});
-        $mysqli->query($sql)";
+        $sql    = "INSERT INTO {$tabela} ({$chaves})VALUES ({$valores})";
+        $this->db->query($sql);
 
-        $alert  = new Alert;
-        $alert->Talert();
+        //$alert  = new Alert;
+        //$alert->Talert();
 
     }
     /**
@@ -71,7 +69,9 @@ class db {
     }
 
     public function delet($_db,$id,$modulo,$arquivo){
-        $mysqli->query("DELETE FROM `$_db` WHERE `{$this->Key}` = '$id'");
+
+
+        $this->db->query("DELETE FROM `$_db` WHERE `{$this->Key}` = '$id'");
 
 
         if(isset($modulo)){

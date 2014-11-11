@@ -5,6 +5,4 @@
  * Date: 10/11/14
  * Time: 17:21
  */
-
-
-echo 'DELETANDO';
+$db->delet();

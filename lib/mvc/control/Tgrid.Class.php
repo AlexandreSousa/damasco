@@ -195,8 +195,7 @@ class Tgrid extends db{
 
         echo '</ul>';
     }
-
-    /**
+     /**
      * @param mixed $Herd
      */
     public function setHerd($Herd)
