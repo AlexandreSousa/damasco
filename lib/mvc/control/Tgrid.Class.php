@@ -123,7 +123,7 @@ class Tgrid extends db{
                     if(!$isEquals) echo '<td>'.$ok[$b].'</td>';
                 }
                 ?>
-                <td width="1"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                <td width="1"><a href="?pg=<?php  echo  "$sis/edit_$arquivos" ?>&<?php echo $this->PrimaryKey ?>=<?php echo $ok[$this->PrimaryKey]; ?>" class="btn btn-primary btn-xs" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></a></td>
                 <td width="1"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete<?php echo $ok[$this->PrimaryKey];?>" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>
 
                 <div class="modal fade" id="delete<?php echo $ok[$this->PrimaryKey];?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

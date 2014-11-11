@@ -5,4 +5,7 @@
  * Date: 10/11/14
  * Time: 17:21
  */
-$db->delet();
+
+$id = $_GET['id'];
+$db->setKey('id');
+$db->delet('menu',$id,'cliente','cliente');

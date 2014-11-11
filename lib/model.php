@@ -49,8 +49,8 @@ class db {
     public function read($db, $where, $limit){
 
        $select =  $this->db->query("SELECT * FROM {$db}  {$where} {$limit}");
-       return $select;
-       return $limit;
+       $val = $select->fetch_array();
+       return $val;
     }
 
     public function update($_db,$campos,$where){
@@ -75,7 +75,7 @@ class db {
 
 
         if(isset($modulo)){
-            echo '<meta http-equiv="refresh" content="0;URL=?pg=modulos/'.$modulo.'/list_'.$arquivo.'" />';
+            echo '<meta http-equiv="refresh" content="0;URL=?pg='.$modulo.'/list_'.$arquivo.'" />';
         }
     }
 
