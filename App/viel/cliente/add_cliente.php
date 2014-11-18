@@ -38,8 +38,17 @@ $x->Tinput('text','nome','nome','','...','',20);
 echo '&nbsp';
 $x->setLabel('status');
 $x->Tinput('text','status','status','','...','',20);
+
+
+echo '<br>';
+$x->setLabel('Lista Select');
+$x->TAutoComplet('nome','lista','campo1,ok,fulano,natas,ola',20);
+echo '<br>';
 $x->Trecord();
 
 
 echo '<br>';
 $x->Tbuton('submint','Gravar');
+
+
+?>

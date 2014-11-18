@@ -38,8 +38,26 @@ class Tform {
      */
     public function Trecord(){
 
-            echo '<input type="text" id="post" name="post" value="ok">';
+            echo '<input type="hidden" id="post" name="post" value="ok">';
     }
+
+
+    public function TAutoComplet($name,$id,$campos,$size){
+        $z = explode(',',$campos);
+        echo '<label>'.$this->Label.'<br>';
+        echo '
+        <input class="form-control" list="'.$id.'" name="'.$name.'" style="width: '.$size.'em;">
+        <datalist id="'.$id.'">
+        ';
+        foreach($z as $f){
+
+            echo '<option value="'.$f.'">';
+        }
+        echo '
+        </datalist>
+        ';
+        echo '</label>';
+            }
 
     /**
      * @param string $name   Nome do formulario

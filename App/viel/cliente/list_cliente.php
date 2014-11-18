@@ -5,9 +5,6 @@
  * Date: 06/11/14
  * Time: 16:34
  */
-
-
-
 $topo = new Tgrid();
 $topo->Ttopo('Listagen de usuario','cliente','cliente');
 

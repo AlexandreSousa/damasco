@@ -1,9 +1,9 @@
 <?php
 /**
  * Conexão com Banco de dados
- * 
+ *
  * Classe para conexão com o banco de dados
- * 
+ *
  * @package     Damascao
  * @subpackage  Damasco.Core.Model
  */
@@ -15,12 +15,12 @@ class db {
 
     public function __construct()
     {
-        require('/var/www/damasco/App/config/db.php');
+        require('App/config/db.php');
         $this->db = new mysqli($host,$user,$pass,$data);
     }
 
     /**
-     * 
+     *
      * @param   string  $tabela     Nome da tabela
      * @param   string  $campos     Campos da tabela
      * @return  void
@@ -39,7 +39,7 @@ class db {
 
     }
     /**
-     * 
+     *
      * @param   string  $db       Nome da Tabela
      * @param   string  $where    Where da tabela
      * @param   string  $limit    Limites maximo e minimu para consulta
@@ -48,13 +48,19 @@ class db {
 
     public function read($db, $where, $limit){
 
-       $select =  $this->db->query("SELECT * FROM {$db}  {$where} {$limit}");
-       $val = $select->fetch_array();
-       return $val;
+        $select =  $this->db->query("SELECT * FROM {$db}  {$where} {$limit}");
+        $val = $select->fetch_array();
+        return $val;
     }
 
-    public function update($_db,$campos,$where){
 
+    /**
+     * @param string $_db       tabela do banco de dados
+     * @param string $campos    Campos de registros vindo do formulario
+     * @param string $where     Valor do campo necessario para a atualização do registro
+     *
+     */
+    public function update($_db,$campos,$where){
         $keys = array_keys($campos);
         $array   = array_values($campos);
         $array2  = array_values($keys);
@@ -64,8 +70,8 @@ class db {
         }
         $size = strlen($variavel);
         $sis = substr($variavel,0, $size-1);
-        $mysqli->query("UPDATE  `$_db` SET  $sis  WHERE `{$this->Key}` = '$where'");
-
+        $sql =("UPDATE  `$_db` SET  $sis  WHERE `{$this->Key}` = '$where'");
+        $this->db->query($sql);
     }
 
     public function delet($_db,$id,$modulo,$arquivo){

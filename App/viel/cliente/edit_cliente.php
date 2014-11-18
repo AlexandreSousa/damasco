@@ -6,6 +6,18 @@
  * Time: 17:57
  */
 
+
+$post = $_POST['post'];
+
+if($post == 'ok'){
+
+
+    $grava = new db;
+    $campos = $_POST['campo'];
+    $grava->update('camoi',$campos,$id);
+
+}
+
 $id = $_GET['id'];
 
 $mostra = $db->read('menu',"WHERE id = {$id}",'');
@@ -23,5 +35,6 @@ $form->Tinput('text','nome','id',$mostra[nome],'','',20);
 $form->setLabel('Status');
 $form->Tinput('text','nome','id',$mostra[status],'','',20);
 echo '<br>';
+$form->Trecord();
 $form->Tbuton('submit','Atualizar');
 $form->Tformf();
