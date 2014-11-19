@@ -25,7 +25,7 @@ class Tgrid extends db{
      */
     public function __construct()
     {
-        require('/var/www/damasco/App/config/db.php');
+        require('App/config/db.php');
 
         $this->db = new mysqli($host,$user,$pass,$data);
 
@@ -61,13 +61,21 @@ class Tgrid extends db{
      * @param string    $campos         Campos da tabela
      */
 
-    public function Ttable($db,$Campos,$sis,$arquivos)
+    public function Ttable($db,$title,$Campos,$sis,$arquivos)
     {
+
+        echo '
+     <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">'.$title.'</h3>
+      </div>
+        ';
+        echo '<div class="panel-body">';
         echo '<table width="100%" border="0" cellpadding="0" class="table table-striped table-hover" cellspacing="0" >';
         echo '<tr>';
         $z = $this->CamposSecond;
 
-        $h       = explode(',',$this->Herd);
+        $h = explode(',',$this->Herd);
 
         foreach($h as $tpo){
 
@@ -93,29 +101,29 @@ class Tgrid extends db{
                     for($x=0;$x<$arrlength;$x++) {
                         if ( $this->CamposSecond[$x]==$b) {
 
-                                $dbs = count($this->DbSecond);
-                                for($d=0;$d<$dbs;$d++){
+                            $dbs = count($this->DbSecond);
+                            for($d=0;$d<$dbs;$d++){
 
-                                    $we = count($this->Where);
-                                    for($w=0;$w<$we;$w++){
-                                        if($w == $d){
-                                            if($w == $x) {
+                                $we = count($this->Where);
+                                for($w=0;$w<$we;$w++){
+                                    if($w == $d){
+                                        if($w == $x) {
 
-                                                $banco = $this->DbSecond[$d];
-                                                $campoc = $this->CamposSecond[$x];
-                                                $id = $this->Where[$x];
+                                            $banco = $this->DbSecond[$d];
+                                            $campoc = $this->CamposSecond[$x];
+                                            $id = $this->Where[$x];
 
-                                                $ddd = $ok[$b];
+                                            $ddd = $ok[$b];
 
-                                                $sech = $this->db->query("SELECT * FROM {$banco} WHERE {$id} = '$ddd'");
-                                                $fff = $sech->fetch_array();
-                                               // echo $fff[$d];
-                                                echo '<td>' .$fff[$this->Valor[$x]]. '</td>';
-                                             }
+                                            $sech = $this->db->query("SELECT * FROM {$banco} WHERE {$id} = '$ddd'");
+                                            $fff = $sech->fetch_array();
+                                            // echo $fff[$d];
+                                            echo '<td>' .$fff[$this->Valor[$x]]. '</td>';
                                         }
                                     }
-                                    $isEquals = true;
                                 }
+                                $isEquals = true;
+                            }
                         }
                     }
                     if(!$isEquals) echo '<td>'.$ok[$b].'</td>';
@@ -146,6 +154,7 @@ class Tgrid extends db{
         }
 
         echo '</table>';
+        echo '</div>';
     }
 
 
@@ -155,10 +164,10 @@ class Tgrid extends db{
 
         //echo "Temos um total de {$total->num_rows} registro exibindo {$res->num_rows} de  {$total}";
 
-        $cal = $max -$this->num_rows;
+        $cal = $max - $this->num_rows;
         echo "Temos um total de {$total->num_rows} registros exibindo {$max} de {$cal}";
 
-        }
+    }
 
     /**
      * @param  strin $db        nome da base de dados
@@ -168,32 +177,46 @@ class Tgrid extends db{
      *
      */
 
-    public function Tpaginacion($db,$mod,$file,$max){
+    public function Tpaginacion($db,$mod,$file,$max,$pag,$links=5){
+        //Prefira por variaveis com valores fixos na entrada da funçao, pois se precisar podera passar outro valor como parametro direto de onde chamar a funcao
+        ///aqui o 5 e o default.
+
+
+        echo '<div align="center">';
+
+
+
 
         echo '<ul class="pagination">';
         $pagin = $this->db->query("SELECT * FROM {$db}");
         $total = $pagin->num_rows;
         $paginas = ceil($total/$max);
-        $links = '5';
-        echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag=1">«</a></li>';
-        for($i = $pag-$links; $i <= $pag-1; $i++){
-            if($i >= 0){
-                echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$i.'">'.$i.'</a></li> ';
+        //Ta ai a minha versao do codigo pronta, e so testar.
+        if($pag==1){
+            echo '<li class="disabled"><a href="#">«</a></li>';
+        } else {
+            echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag=1">«</a></li>';
+        }
+        for($i = $pag - $links; $i <= $pag + $links; $i++){
+            if(($pag!="")&&($i>=1)&&($i<=$paginas)){
+                if($i==$pag){
+                    echo '<li class="disabled"><a href="#">'.$i.'</a></li>';
+                } elseif($i<$pag){
+                    echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$i.'">'.$i.'</a></li> ';
+                } elseif($i>$pag){
+                    echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$i.'">'.$i.'</a></li> ';
+                }
             }
         }
-        echo '<li class="disabled"><a href="#">'.$pag.'</a></li>';
-        for($i = $pag +1; $i <= $pag+$links; $i++){
-            if($i > $paginas){
-
-            }else{
-                echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$i.'">'.$i.'</a></li>';
-            }
+        if($pag==$paginas){
+            echo '<li class="disabled"><a href="#">«</a></li>';
+        } else {
+            echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$paginas.'">»</a></li>';
         }
-        echo '<li><a href="?pg='.$mod.'/list_'.$file.'&pag='.$paginas.'">»</a></li>';
-
         echo '</ul>';
+        echo '</div>';
     }
-     /**
+    /**
      * @param mixed $Herd
      */
     public function setHerd($Herd)
@@ -207,10 +230,10 @@ class Tgrid extends db{
     public function setPagin($inicio,$maximo)
     {
 
-       $this->Pagin = "LIMIT $inicio,$maximo";
+        $this->Pagin = "LIMIT $inicio,$maximo";
 
 
-       // $this->Pagin = "LIMIT $inicio $maximo";
+        // $this->Pagin = "LIMIT $inicio $maximo";
     }
 
     /**
